@@ -14,28 +14,11 @@ pipeline{
               
             }
          }        
-       stage('Build'){
-           failFast true
-           parallel{
-           stage('building'){
+       stage('Build'){    
             steps{
                 sh 'mvn clean package | tee output.log'
-                sh '! grep "WARNING" output.log'
-                script{
-                    BUILD_COMPLETE = true
-                }
-            }
-           }
-           stage('monitoring the logs'){
-               steps{
-                   script{
-                       while(BUILD_COMPLETE != true){
-                           sh '! grep "WARNING" output.log'
-                       }
-                   }
-               }}
-           }
-         }
+              }
+          }
         stage('SonarQube analysis') {
         steps{
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
