@@ -21,15 +21,15 @@ pipeline{
           }
         stage('SonarQube analysis') {
         steps{
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
         withSonarQubeEnv('Sonarqube_token') { 
          sh 'mvn sonar:sonar -Dsonar.projectKey=my-app3 -Dsonar.host.url=http://172.31.41.52:9000 -Dsonar.login=sqp_74637c971e7a93237e069a76c41186963e6e8ee9'
                 }
-            }
+              }}
         }
          stage('pushing artifacts to jfrog'){
          steps{
-         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                rtUpload (
                          serverId: 'JFrog-1',
                          spec: '''{
@@ -40,7 +40,7 @@ pipeline{
                           }
                         ]
                   }''')
- 
+               }
        }
       }
         stage('Completed'){
