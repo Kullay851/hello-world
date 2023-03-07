@@ -30,6 +30,13 @@ pipeline{
                }
              }
         }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
          stage('pushing artifacts to jfrog'){
          steps{
                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
@@ -52,7 +59,7 @@ pipeline{
                  }
           }
           
-        stage('Completed'){
+        stage('Success'){
             steps{
                 echo "completed"
             }
