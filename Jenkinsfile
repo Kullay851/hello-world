@@ -46,7 +46,9 @@ pipeline{
        }
       }
           stage('deploy'){
-          ansiblePlaybook inventory: '/etc/ansible/hosts', playbook: '/home/jenkins/deploy.yaml'
+                 steps{
+                    ansiblePlaybook inventory: '/etc/ansible/hosts', playbook: '/home/jenkins/deploy.yaml'
+                 }
           }
           
         stage('Completed'){
