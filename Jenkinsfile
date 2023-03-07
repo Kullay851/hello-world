@@ -23,11 +23,12 @@ pipeline{
           }
         stage('SonarQube analysis') {
         steps{
-       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
         withSonarQubeEnv('Sonarqube_token') { 
          sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Project-1 -Dsonar.host.url=http://43.205.211.191:9000  -Dsonar.login=sqp_81b825efeef5d1629b7b3099cdbd61bdbea31983'
                 }
-            }
+               }
+             }
         }
          stage('pushing artifacts to jfrog'){
          steps{
