@@ -1,5 +1,7 @@
 pipeline{
-      agent any
+       agent {
+        label 'ChildNode'
+    }
       environment{
           BUILD_COMPLETE = false
       }
@@ -43,6 +45,10 @@ pipeline{
                }
        }
       }
+          stage('deploy'){
+          ansiblePlaybook inventory: '/etc/ansible/hosts', playbook: '/home/jenkins/deploy.yaml'
+          }
+          
         stage('Completed'){
             steps{
                 echo "completed"
