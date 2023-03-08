@@ -7,7 +7,7 @@ pipeline{
       }
     parameters {
        // string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven goal to build the package' )
-        choice(name: 'BRANCH_TO_BUILD', choices: [ 'master'], description: 'Branch to build')
+        choice(name: 'BRANCH_TO_BUILD', choices: [ 'master', 'dev', 'qa', 'UAT'], description: 'Branch to build')
     }
     stages{
        stage('GetCode'){
