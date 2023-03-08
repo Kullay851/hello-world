@@ -18,7 +18,7 @@ pipeline{
          }        
        stage('Build'){    
             steps{
-                sh 'mvn clean package | tee output.log'
+                sh 'mvn clean install | tee output.log'
               }
           }
         stage('SonarQube analysis') {
