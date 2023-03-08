@@ -1,6 +1,6 @@
 pipeline{
        agent {
-        label 'ChildNode2'
+        label 'ChildNode'
     }
       environment{
           BUILD_COMPLETE = false
