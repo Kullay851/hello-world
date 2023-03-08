@@ -25,7 +25,7 @@ pipeline{
         steps{
                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
         withSonarQubeEnv('Sonarqube_token') { 
-         sh 'mvn sonar:sonar -Dsonar.projectKey=Project-1 --Dsonar.login=sqp_db3514c835f29043a453767ad9c1078519935646'
+         sh 'mvn sonar:sonar -Dsonar.projectKey=Project-1 -Dsonar.host.url=http://3.110.184.191:9000 -Dsonar.login=sqp_db3514c835f29043a453767ad9c1078519935646'
                 }
                }
              }
