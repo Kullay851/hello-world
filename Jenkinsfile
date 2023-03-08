@@ -37,22 +37,7 @@ pipeline{
               }
             }
           }
-         stage('pushing artifacts to jfrog'){
-         steps{
-               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-               rtUpload (
-                         serverId: 'JFrog-1',
-                         spec: '''{
-                         "files": [
-                          {
-                          "pattern": "/var/lib/jenkins/workspace/Jenkins-Ansible/target/*.jar",
-                          "target": "Artifactory/"
-                          }
-                        ]
-                  }''')
-               }
-       }
-      }
+       
           stage('deploy'){
                  steps{
                     ansiblePlaybook inventory: '/etc/ansible/hosts', playbook: '/home/jenkins/deploy.yaml'
